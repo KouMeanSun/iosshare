@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "HttpManager.h"
 #import "Movie.h"
+#import "SecondViewController.h"
 
 static  NSString *myCellID = @"myCellID";
 
@@ -32,6 +33,18 @@ static  NSString *myCellID = @"myCellID";
 -(void)initViews{
     [self.view addSubview:self.tableView];
     self.tableView.frame = CGRectMake(0, 74, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-74);
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    btn.frame = CGRectMake(0, 300, 150, 40);
+    [btn setBackgroundColor:[UIColor redColor]];
+    [btn setTitle:@"跳转" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+}
+-(void)onClick:(UIButton *)btn{
+    NSLog(@"点击了按钮");
+    SecondViewController *vc = [[SecondViewController alloc] init];
+    vc.url = @"www.baidu.com";
+    [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)loadHttpData{
     // 测试UIL https://reactnative.dev/movies.json
